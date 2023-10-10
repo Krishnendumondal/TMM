@@ -515,30 +515,35 @@
         maturityScore: maturityScore
     };
 
-    // Check if there's existing data in localStorage
-    var existingData = localStorage.getItem("maturityData");
-    if (existingData) {
-        // Parse the existing data
-        existingData = JSON.parse(existingData);
+    try {
+        // Check if there's existing data in localStorage
+        var existingData = localStorage.getItem("maturityData");
+        if (existingData) {
+            // Parse the existing data
+            existingData = JSON.parse(existingData);
 
-        // Append the new data
-        existingData.push(data);
+            // Append the new data
+            existingData.push(data);
 
-        // Save the updated data back to localStorage
-        localStorage.setItem("maturityData", JSON.stringify(existingData));
-    } else {
-        // Create a new array for data and store the first entry
-        var newData = [data];
+            // Save the updated data back to localStorage
+            localStorage.setItem("maturityData", JSON.stringify(existingData));
+        } else {
+            // Create a new array for data and store the first entry
+            var newData = [data];
 
-        // Save the data to localStorage
-        localStorage.setItem("maturityData", JSON.stringify(newData));
+            // Save the data to localStorage
+            localStorage.setItem("maturityData", JSON.stringify(newData));
+        }
+
+        // Redirect to maturity-details.html
+        window.location.href = "maturity-details.html";
+    } catch (error) {
+        // Handle any errors by displaying an alert
+        alert("An error occurred: " + error.message);
     }
-
-    // Redirect to maturity-details.html
-    window.location.href = "maturity-details.html";
 }
 
-        //Dropdown Logic
+	    //Dropdown Logic
         function handleTestCaseDesignChange() {
             var testCaseDesignValue = document.getElementById("testCaseDesign").value;
             var testCaseCoverageSelect = document.getElementById("testCaseCoverage");
