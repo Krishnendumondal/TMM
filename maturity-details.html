@@ -62,14 +62,36 @@
         <th style="width: 50%;">Project Name</th>
         <th style="width: 25%;">Maturity Level</th>
         <th style="width: 25%;">Maturity Score</th>
+        <th style="width: 25%;">LOBid</th> <!-- Include LOBid column -->
       </tr>
     </thead>
     <tbody>
-      <!-- This table body is initially empty -->
+      <!-- This table body will be populated with data from localStorage -->
     </tbody>
   </table>
 
   <!-- Back to TMM Calculator button -->
   <a href="index.html" class="back-button">Back to TMM Calculator</a>
+
+  <script>
+    // Retrieve data from localStorage and populate the table
+    var maturityData = JSON.parse(localStorage.getItem("maturityData"));
+    var tableBody = document.querySelector("#maturityTable tbody");
+
+    if (maturityData && maturityData.length > 0) {
+      maturityData.forEach(function(data) {
+        var row = tableBody.insertRow();
+        var projectNameCell = row.insertCell(0);
+        var maturityLevelCell = row.insertCell(1);
+        var maturityScoreCell = row.insertCell(2);
+        var lobIdCell = row.insertCell(3); // Include LOBid cell
+
+        projectNameCell.innerHTML = data.projectName;
+        maturityLevelCell.innerHTML = data.maturityLevel;
+        maturityScoreCell.innerHTML = data.maturityScore;
+        lobIdCell.innerHTML = data.LOBid; // Populate LOBid cell
+      });
+    }
+  </script>
 </body>
 </html>
