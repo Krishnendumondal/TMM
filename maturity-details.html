@@ -60,7 +60,7 @@
     <thead>
       <tr>
         <!-- Removed "Project Name" column -->
-        <th style="width: 50%;">Project Name</th>
+        <th style="width: 25%;">LOBid</th>
         <th style="width: 25%;">Maturity Level</th>
         <th style="width: 25%;">Maturity Score</th>
       </tr>
@@ -80,15 +80,37 @@
 
     if (maturityData && maturityData.length > 0) {
       maturityData.forEach(function (item) {
-        var row = tableBody.insertRow();
-        var projectNameCell = row.insertCell(0); // Added Project Name cell
-        var maturityLevelCell = row.insertCell(1);
-        var maturityScoreCell = row.insertCell(2);
+        // Check if there's an existing row with the same LOBid
+        var existingRow = null;
+        var rows = tableBody.getElementsByTagName("tr");
+        for (var i = 0; i < rows.length; i++) {
+          var cells = rows[i].getElementsByTagName("td");
+          if (cells.length > 0 && cells[0].textContent === item.LOBid) {
+            existingRow = rows[i];
+            break;
+          }
+        }
 
-        // Populate cells with data
-        projectNameCell.textContent = item.LOBid; // Populate Project Name with LOBid
-        maturityLevelCell.textContent = item.maturityLevel;
-        maturityScoreCell.textContent = item.maturityScore;
+        if (existingRow) {
+          // If a row with the same LOBid exists, update it
+          var maturityLevelCell = existingRow.insertCell(1);
+          var maturityScoreCell = existingRow.insertCell(2);
+
+          // Populate cells with data
+          maturityLevelCell.textContent = item.maturityLevel;
+          maturityScoreCell.textContent = item.maturityScore;
+        } else {
+          // If no matching row, create a new row
+          var row = tableBody.insertRow();
+          var lobIdCell = row.insertCell(0); // Added LOBid cell
+          var maturityLevelCell = row.insertCell(1);
+          var maturityScoreCell = row.insertCell(2);
+
+          // Populate cells with data
+          lobIdCell.textContent = item.LOBid;
+          maturityLevelCell.textContent = item.maturityLevel;
+          maturityScoreCell.textContent = item.maturityScore;
+        }
       });
     }
   </script>
