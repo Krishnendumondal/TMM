@@ -502,13 +502,42 @@
         <button onclick="clearForm()">Clear</button>
         <button id="calculateButton" onclick="calculateMaturity()">Calculate</button>
         <button id="generateButton" onclick="generateData()">Create Entry</button>
-	<script src="generateData_script3.js"></script>
-    </div>
-    //<script> src="generateData_script2.js" cache-control="max-age=3600" etag="123456789"></script>
-
-</script>
 
     <script>
+        function saveDataToLocalStorage() {
+    // Retrieve data from the form
+    var maturityLevel = document.getElementById("maturityLevel").value;
+    var maturityScore = document.getElementById("maturityScore").value;
+
+    // Create an object to store the data
+    var data = {
+        maturityLevel: maturityLevel,
+        maturityScore: maturityScore
+    };
+
+    // Check if there's existing data in localStorage
+    var existingData = localStorage.getItem("maturityData");
+    if (existingData) {
+        // Parse the existing data
+        existingData = JSON.parse(existingData);
+
+        // Append the new data
+        existingData.push(data);
+
+        // Save the updated data back to localStorage
+        localStorage.setItem("maturityData", JSON.stringify(existingData));
+    } else {
+        // Create a new array for data and store the first entry
+        var newData = [data];
+
+        // Save the data to localStorage
+        localStorage.setItem("maturityData", JSON.stringify(newData));
+    }
+
+    // Redirect to maturity-details.html
+    window.location.href = "maturity-details.html";
+}
+
         //Dropdown Logic
         function handleTestCaseDesignChange() {
             var testCaseDesignValue = document.getElementById("testCaseDesign").value;
