@@ -1,0 +1,22 @@
+<script>
+  // Function to retrieve and display data
+  function displayMaturityDetails() {
+    const maturityData = JSON.parse(localStorage.getItem('maturityData')) || [];
+
+    const table = document.getElementById('maturityTable');
+
+    maturityData.forEach((entry) => {
+      const row = table.insertRow(-1);
+      const projectNameCell = row.insertCell(0);
+      const maturityLevelCell = row.insertCell(1);
+      const maturityScoreCell = row.insertCell(2);
+
+      projectNameCell.innerHTML = entry.lob;
+      maturityLevelCell.innerHTML = entry.maturityLevel;
+      maturityScoreCell.innerHTML = entry.maturityScore;
+    });
+  }
+
+  // Call the function when the page loads
+  window.onload = displayMaturityDetails;
+</script>
