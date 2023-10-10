@@ -504,18 +504,20 @@
         <button id="generateButton" onclick="saveDataToLocalStorage()">Create Entry</button>
 
     <script>
-        function saveDataToLocalStorage() {
-    // Retrieve data from the form
-    var maturityLevel = document.getElementById("maturityLevel").value;
-    var maturityScore = document.getElementById("maturityScore").value;
-
-    // Create an object to store the data
-    var data = {
-        maturityLevel: maturityLevel,
-        maturityScore: maturityScore
-    };
-
+function saveDataToLocalStorage() {
     try {
+        // Retrieve data from the form
+        var maturityLevel = document.getElementById("maturityLevel").value;
+        var maturityScore = document.getElementById("maturityScore").value;
+        var lobId = document.getElementById("LOBid").value; // Assuming "LOBid" is the id of the input field for LOBid.
+
+        // Create an object to store the data
+        var data = {
+            maturityLevel: maturityLevel,
+            maturityScore: maturityScore,
+            LOBid: lobId // Include LOBid in the data
+        };
+
         // Check if there's existing data in localStorage
         var existingData = localStorage.getItem("maturityData");
         if (existingData) {
