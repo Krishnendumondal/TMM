@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Webpage with Table</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .separator {
+          border-top: 4px solid blue;
+          margin-left: 148px;
+ 	  width: 70%;
+	  padding-left: 150px;
+	  padding-top: 10px;
+        }
+
+        table {
+            border-collapse: collapse;
+            margin: 0 auto;
+            width: 80%;
+        }
+
+        th,
+        td {
+            border: 2px solid blue;
+            padding: 15px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        td input[type="text"] {
+            width: 100%;
+            padding: 5px;
+            border: 2px solid blue;
+            border-radius: 5px;
+            text-align: center;
+            box-sizing: border-box;
+        }
+
+        td select {
+            width: 108%;
+            padding: 5px;
+            border: 2px solid blue;
+            border-radius: 5px;
+        }
+
+        .Currentbutton {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            text-align: center;
+            font-size: 16px;
+            border-radius: 4px;
+            border: none;
+            cursor: pointer;
+            margin-left: 325px;
+            margin-bottom: 10px;
+        }
+
+        .Currentbutton:hover {
+            background-color: #45a049;
+        }
+
+        .button-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .button-container button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            align-items: center;
+            margin-right: 10px;
+            margin-bottom: 25px;
+        }
+
+        .button-container button:hover {
+            background-color: #45a049;
+        }
+
+        .disabled-button {
+            background-color: #ccc;
+            color: #999;
+            cursor: not-allowed;
+        }
+
+        .maturity-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 25px;
+            margin-bottom: 25px;
+        }
+
+        .maturity-container label {
+            padding: 20px;
+            text-align: right;
+            box-sizing: border-box;
+  	    width: 10%;
+        }
+
+        .maturity-container input[type="text"] {
+            padding: 5px;
+            width: 150px;
+            border: 2px solid blue;
+            border-radius: 5px;
+            text-align: center;
+            box-sizing: border-box;
+            background-color: #f2f2f2;
+            color: #333;
+            font-weight: bold;
+        }
+
+        .form-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        label {
+            width: 39px;
+            margin-right: 1rem;
+            font-weight: bold;
+            padding-left: 17rem;
+        }
+
+        .select-wrapper {
+            flex: 1;
+        }
+
+        .custom-select {
+            width: 17%;
+            padding: 0.375rem 0.75rem;
+            font-size: 1rem;
+            line-height: 1.5;
+            color: #495057;
+            background-color: #fff;
+            background-clip: padding-box;
+            text-align: center;
+            border: 2px solid blue;
+            border-radius: 0.25rem;
+            transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+        }
+
+        .custom-select:focus {
+            border-color: #80bdff;
+            outline: 0;
+            box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="form-group">
+        <label for="lob-select">LOB</label>
+        <div class="select-wrapper">
+            <select id="LOBid" class="custom-select">
+      <option value="SELECT">SELECT</option>
+      <option value="lob2">Hapi</option>
+      <option value="lob3">Vision</option>
+    </select>
+        </div>
+    </div>
+    <button class="Currentbutton" onclick="goToMaturityDetails()">Current Maturity Detail</button>
+
+    <div class="separator"></div>
+
+    <table id="myTable">
+        <tr>
+            <th>QA Task</th>
+            <th>Questions</th>
+            <th>Points</th>
+            <th>Weightage</th>
+            <th>Yes/No</th>
+        </tr>
+        <tr id="testCaseDesignRow">
+            <td rowspan="5">Test Design</td>
+            <td>a. Are you designing Test Cases in JIRA/Zephyr?</td>
+            <td><input type="text" id="Points1" class="Points" value=8></td>
+            <td><input type="text" id="Weightage1" class="Weightage" value=0.10></td>
+            <td>
+                <select id="testCaseDesign" class="Yes/No" onchange="handleTestCaseDesignChange()">
+          <option value="SELECT">SELECT</option>
+          <option value="yes">Yes</option>
+          <option value="no">No</option>
+          <option value="na">NA</option>
+        </select>
+            </td>
+        </tr>
+        <tr id="testCaseCoverageRow">
+            <td>b. Are your Test Cases covering acceptance criteria?</td>
+
+            <td><input type="text" id="Points2" class="Points" value=5></td>
+            <td><input type="text" id="Weightage2" class="Weightage" value=0.08></td>
+            <td>
+                <select id="testCaseCoverage" class="Yes/No">
+          <option value="SELECT">SELECT</option>
+          <option value="yes">Yes</option>
+          <option value="no">No</option>
+          <option value="na">NA</option>
+        </select>
+            </td>
+        </tr>
+        <tr id="testCaseLinkedRow">
+            <td>c. Are your Test Cases linked to JIRA Stories?</td>
+            <td><input type="text" id="Points3" class="Points" value=3></td>
+            <td><input type="text" id="Weightage3" class="Weightage" value=0.06></td>
+            <td>
+                <select id="testCaseLinked" class="Yes/No">
+          <option value="SELECT">SELECT</option>
+          <option value="yes">Yes</option>
+          <option value="no">No</option>
+          <option value="na">NA</option>
+        </select>
+            </td>
+        </tr>
+        <tr id="regressionSuiteRow" onchange="handleregressionsuiteChange()">
+            <td>d. Do you have a regression suite?</td>
+            <td><input type="text" id="Points4" class="Points" value=3></td>
+            <td><input type="text" id="Weightage4" class="Weightage" value=0.05></td>
+            <td>
+                <select id="regressionSuite" class="Yes/No">
+          <option value="SELECT">SELECT</option>
+          <option value="yes">Yes</option>
+          <option value="no">No</option>
+          <option value="na">NA</option>
+        </select>
+            </td>
+        </tr>
+        <tr id="regressionOptimizeRow">
+            <td>e. Is your regression suite optimized regularly?</td>
+            <td><input type="text" id="Points5" class="Points" value=3></td>
+            <td><input type="text" id="Weightage5" class="Weightage" value=0.04></td>
+            <td>
+                <select id="regressionOptimize" class="Yes/No">
+          <option value="SELECT">SELECT</option>
+          <option value="yes">Yes</option>
+          <option value="no">No</option>
+          <option value="na">NA</option>
+        </select>
+            </td>
+        </tr>
+        <tr id="testCaseZephyrRow">
+            <td rowspan="2">Test Execution</td>
+            <td>a. Are you executing Test Cases using Zephyr?</td>
+            <td><input type="text" id="Points6" class="Points" value=8></td>
+            <td><input type="text" id="Weightage6" class="Weightage" value=0.10></td>
+            <td>
+                <select id="testCaseZephyr" class="Yes/No" onchange="handltestExecutionChange()">
+          <option value="SELECT">SELECT</option>
+          <option value="yes">Yes</option>
+          <option value="no">No</option>
+          <option value="na">NA</option>
+        </select>
+            </td>
+        </tr>
+        <tr id="testCycleRow">
+            <td>b. Do you create Test Cycles to execute Test Cases?</td>
+            <td><input type="text" id="Points7" class="Points" value=5></td>
+            <td><input type="text" id="Weightage7" class="Weightage" value=0.08></td>
+            <td>
+                <select id="testCycle" class="Yes/No">
+          <option value="SELECT">SELECT</option>
+          <option value="yes">Yes</option>
+          <option value="no">No</option>
+          <option value="na">NA</option>
+        </select>
+            </td>
+        </tr>
+        <tr id="testReportsRow">
+            <td rowspan="2">Test Reporting</td>
+            <td>a. Are you preparing and sending test reports?</td>
+            <td><input type="text" id="Points8" class="Points" value=3></td>
+            <td><input type="text" id="Weightage8" class="Weightage" value=0.03></td>
+            <td>
+                <select id="testReports" class="Yes/No">
+          <option value="SELECT">SELECT</option>
+          <option value="yes">Yes</option>
+          <option value="no">No</option>
+          <option value="na">NA</option>
+        </select>
+            </td>
+        </tr>
+        <trid="testMetrics">
+            <td>b. Are you reporting test metrics?</td>
+            <td><input type="text" id="Points9" class="Points" value=2></td>
+            <td><input type="text" id="Weightage9" class="Weightage" value=0.03></td>
+            <td>
+                <select class="Yes/No">
+          <option value="SELECT">SELECT</option>
+          <option value="yes">Yes</option>
+          <option value="no">No</option>
+          <option value="na">NA</option>
+        </select>
+            </td>
+            </tr>
+            <tr>
+                <td rowspan="5">Defect Management</td>
+                <td>a. Are you logging defects?</td>
+                <td><input type="text" id="Points10" class="Points" value=8></td>
+                <td><input type="text" id="Weightage10" class="Weightage" value=0.10></td>
+                <td>
+                    <select id="loggingDefects" class="Yes/No" onchange="handltestLoggingdefectChange()">
+          <option value="SELECT">SELECT</option>
+          <option value="yes">Yes</option>
+          <option value="no">No</option>
+          <option value="na">NA</option>
+        </select>
+                </td>
+            </tr>
+            <tr>
+                <td>b. Are you reporting defects as 'Bugs' in Zephyr?</td>
+                <td><input type="text" id="Points11" class="Points" value=5></td>
+                <td><input type="text" id="Weightage11" class="Weightage" value=0.08></td>
+                <td>
+                    <select id="BugsZephyr" class="Yes/No">
+          <option value="SELECT">SELECT</option>
+          <option value="yes">Yes</option>
+          <option value="no">No</option>
+          <option value="na">NA</option>
+        </select>
+                </td>
+            </tr>
+            <tr>
+                <td>c. Are you closing all defects?</td>
+                <td><input type="text" id="Points12" class="Points" value=3></td>
+                <td><input type="text" id="Weightage12" class="Weightage" value=0.06></td>
+                <td>
+                    <select id="ClosingDefects" class="Yes/No">
+          <option value="SELECT">SELECT</option>
+          <option value="yes">Yes</option>
+          <option value="no">No</option>
+          <option value="na">NA</option>
+        </select>
+                </td>
+            </tr>
+            <tr>
+                <td>d. Are you linking defects to Test Case?</td>
+                <td><input type="text" id="Points13" class="Points" value=3></td>
+                <td><input type="text" id="Weightage13" class="Weightage" value=0.06></td>
+                <td>
+                    <select id="DefectToTestcase" class="Yes/No">
+          <option value="SELECT">SELECT</option>
+          <option value="yes">Yes</option>
+          <option value="no">No</option>
+          <option value="na">NA</option>
+        </select>
+                </td>
+            </tr>
+            <tr>
+                <td>e. Are you linking defects to JIRA Story?</td>
+                <td><input type="text" id="Points14" class="Points" value=5></td>
+                <td><input type="text" id="Weightage14" class="Weightage" value=0.06></td>
+                <td>
+                    <select id="JiraStory" class="Yes/No">
+          <option value="SELECT">SELECT</option>
+          <option value="yes">Yes</option>
+          <option value="no">No</option>
+          <option value="na">NA</option>
+        </select>
+                </td>
+            </tr>
+            <tr>
+                <td rowspan="6">Automation</td>
+                <td>a. Are you doing test automation?</td>
+                <td><input type="text" id="Points15" class="Points" value=8></td>
+                <td><input type="text" id="Weightage15" class="Weightage" value=0.08></td>
+                <td>
+                    <select id="TestAutomation" class="Yes/No" onchange="handltestAutomationChange()">
+          <option value="SELECT">SELECT</option>
+          <option value="yes">Yes</option>
+          <option value="no">No</option>
+<option value="na">NA</option>
+</select>
+                </td>
+            </tr>
+            <tr>
+                <td>b. Have you automated >60% of applicable test cases?</td>
+                <td><input type="text" id="Points16" class="Points" value=5></td>
+                <td><input type="text" id="Weightage16" class="Weightage" value=0.06></td>
+                <td>
+                    <select id="ApplicableTestcase" class="Yes/No">
+<option value="SELECT">SELECT</option>
+<option value="yes">Yes</option>
+<option value="no">No</option>
+<option value="na">NA</option>
+</select>
+                </td>
+            </tr>
+            <tr>
+                <td>c. Are you executing all the automated Test cases every sprint?</td>
+                <td><input type="text" id="Points17" class="Points" value=3></td>
+                <td><input type="text" id="Weightage17" class="Weightage" value=0.05></td>
+                <td>
+                    <select id="EverySprint" class="Yes/No">
+<option value="SELECT">SELECT</option>
+<option value="yes">Yes</option>
+<option value="no">No</option>
+<option value="na">NA</option>
+</select>
+                </td>
+            </tr>
+            <tr>
+                <td>d. Are you doing inSprint automation (Shift Left - BDD/TDD)?</td>
+                <td><input type="text" id="Points18" class="Points" value=5></td>
+                <td><input type="text" id="Weightage18" class="Weightage" value=0.05></td>
+                <td>
+                    <select id="InsprintAutomation" class="Yes/No">
+<option value="SELECT">SELECT</option>
+<option value="yes">Yes</option>
+<option value="no">No</option>
+<option value="na">NA</option>
+</select>
+                </td>
+            </tr>
+            <tr>
+                <td>e. Is your Test Cycles integrated with CI Pipeline?</td>
+                <td><input type="text" id="Points19" class="Points" value=3></td>
+                <td><input type="text" id="Weightage19" class="Weightage" value=0.04></td>
+                <td>
+                    <select id="CiPipeline" class="Yes/No">
+<option value="SELECT">SELECT</option>
+<option value="yes">Yes</option>
+<option value="no">No</option>
+<option value="na">NA</option>
+</select>
+                </td>
+            </tr>
+            <tr>
+                <td>f. Are you doing any non-functional Testing?</td>
+                <td><input type="text" id="Points20" class="Points" value=2></td>
+                <td><input type="text" id="Weightage20" class="Weightage" value=0.03></td>
+                <td>
+                    <select id="NonFunctionalTesting" class="Yes/No">
+<option value="SELECT">SELECT</option>
+<option value="yes">Yes</option>
+<option value="no">No</option>
+<option value="na">NA</option>
+</select>
+                </td>
+            </tr>
+            <tr>
+                <td rowspan="3">Test Process/Team Collaboration</td>
+                <td>a. Do you have a dedicated QA Environment?</td>
+                <td><input type="text" id="Points21" class="Points" value=5></td>
+                <td><input type="text" id="Weightage21" class="Weightage" value=0.08></td>
+                <td>
+                    <select class="Yes/No">
+<option value="SELECT">SELECT</option>
+<option value="yes">Yes</option>
+<option value="no">No</option>
+<option value="na">NA</option>
+</select>
+                </td>
+            </tr>
+            <tr>
+                <td>b. Do you have dedicated QA resources?</td>
+                <td><input type="text" id="Points22" class="Points" value=5></td>
+                <td><input type="text" id="Weightage22" class="Weightage" value=0.08></td>
+                <td>
+                    <select class="Yes/No">
+<option value="SELECT">SELECT</option>
+<option value="yes">Yes</option>
+<option value="no">No</option>
+<option value="na">NA</option>
+</select>
+                </td>
+            </tr>
+            <tr>
+                <td>c. Are you following any Agile Methodology?</td>
+                <td><input type="text" id="Points23" class="Points" value=3></td>
+                <td><input type="text" id="Weightage23" class="Weightage" value=0.04></td>
+                <td>
+                    <select class="Yes/No">
+<option value="SELECT">SELECT</option>
+<option value="yes">Yes</option>
+<option value="no">No</option>
+<option value="na">NA</option>
+</select>
+                </td>
+            </tr>
+    </table>
+    <div class="maturity-container">
+        <label>Maturity Level:</label>
+        <input type="text" id="maturityLevel" readonly>
+        <label>Maturity Score:</label>
+        <input type="text" id="maturityScore" readonly>
+    </div>
+    <div class="button-container">
+        <button onclick="clearForm()">Clear</button>
+        <button id="calculateButton" onclick="calculateMaturity()">Calculate</button>
+        <button id="generateButton" onclick="generateData()">Create Entry</button>
+	<script src="generateData_script3.js"></script>
+    </div>
+    //<script> src="generateData_script2.js" cache-control="max-age=3600" etag="123456789"></script>
+
+</script>
+
+    <script>
+        //Dropdown Logic
+        function handleTestCaseDesignChange() {
+            var testCaseDesignValue = document.getElementById("testCaseDesign").value;
+            var testCaseCoverageSelect = document.getElementById("testCaseCoverage");
+            var testCaseLinkedSelect = document.getElementById("testCaseLinked");
+
+
+            if (testCaseDesignValue == "no") {
+                testCaseCoverageSelect.value = "no";
+                testCaseCoverageSelect.disabled = true;
+                testCaseLinkedSelect.value = "no";
+                testCaseLinkedSelect.disabled = true;
+
+            } else {
+                testCaseCoverageSelect.disabled = false;
+                testCaseLinkedSelect.disabled = false;
+            }
+        }
+
+        function handleregressionsuiteChange() {
+            var regressionSuiteValue = document.getElementById("regressionSuite").value;
+            var regressionOptimizeSelect = document.getElementById("regressionOptimize");
+            if (regressionSuiteValue == "no") {
+                regressionOptimizeSelect.value = "no";
+                regressionOptimizeSelect.disabled = true;
+
+            } else {
+                regressionOptimizeSelect.disabled = false;
+            }
+        }
+
+        function handltestExecutionChange() {
+            var testCaseZephyrValue = document.getElementById("testCaseZephyr").value;
+            var testCycleSelect = document.getElementById("testCycle");
+            if (testCaseZephyrValue == "no") {
+                testCycleSelect.value = "no";
+                testCycleSelect.disabled = true;
+            } else {
+                testCycleSelect.disabled = false;
+            }
+        }
+
+        function handltestLoggingdefectChange() {
+            var loggingDefectsValue = document.getElementById("loggingDefects").value;
+            var BugsZephyrSelect = document.getElementById("BugsZephyr");
+            var ClosingDefectsSelect = document.getElementById("ClosingDefects");
+            var DefectToTestcaseSelect = document.getElementById("DefectToTestcase");
+            var JiraStorySelect = document.getElementById("JiraStory");
+            if (loggingDefectsValue == "no") {
+                BugsZephyrSelect.value = "no";
+                BugsZephyrSelect.disabled = true;
+                DefectToTestcaseSelect.value = "no";
+                DefectToTestcaseSelect.disabled = true;
+                ClosingDefectsSelect.value = "no";
+                ClosingDefectsSelect.disabled = true;
+                JiraStorySelect.value = "no";
+                JiraStorySelect.disabled = true;
+            } else {
+                BugsZephyrSelect.disabled = false;
+                ClosingDefectsSelect.disabled = false;
+                DefectToTestcaseSelect.disabled = false;
+                JiraStorySelect.disabled = false;
+            }
+        }
+
+        function handltestAutomationChange() {
+            var TestAutomationValue = document.getElementById("TestAutomation").value;
+            var ApplicableTestcaseSelect = document.getElementById("ApplicableTestcase");
+            var EverySprintSelect = document.getElementById("EverySprint");
+            var InsprintAutomationSelect = document.getElementById("InsprintAutomation");
+            var CiPipelineSelect = document.getElementById("CiPipeline");
+            if (TestAutomationValue == "no") {
+                ApplicableTestcaseSelect.value = "no";
+                ApplicableTestcaseSelect.disabled = true;
+                EverySprintSelect.value = "no";
+                EverySprintSelect.disabled = true;
+                InsprintAutomationSelect.value = "no";
+                InsprintAutomationSelect.disabled = true;
+                CiPipelineSelect.value = "no";
+                CiPipelineSelect.disabled = true;
+            } else {
+                ApplicableTestcaseSelect.disabled = false;
+                EverySprintSelect.disabled = false;
+                InsprintAutomationSelect.disabled = false;
+                CiPipelineSelect.disabled = false;
+            }
+        }
+
+        function calculateMaturity() {
+
+            var pointsInputs = document.getElementsByClassName('Points');
+            var weightageInputs = document.getElementsByClassName('Weightage');
+            var totalPoints = 0;
+            var totalWeightage = 0;
+            var maturityLevel;
+            for (var i = 0; i < pointsInputs.length; i++) {
+                var points = parseFloat(pointsInputs[i].value) || 0;
+                var weightage = parseFloat(weightageInputs[i].value) || 0;
+                var yesNoValue = document.getElementsByClassName('Yes/No')[i].value;
+                if (yesNoValue === 'yes') {
+                    totalPoints += points * weightage;
+                    totalWeightage += weightage;
+                }
+                if (yesNoValue === 'na') {
+                    // totalPoints += points * weightage;
+                    totalWeightage = totalWeightage;
+                    totalPoints = totalPoints;
+                }
+                if (yesNoValue === 'no') {
+                    totalWeightage += weightage;
+                    totalPoints = totalPoints;
+
+                }
+                if (yesNoValue === 'SELECT') {
+                    document.getElementById("maturityScore").value = "Complete Selection";
+                    maturityLevel = "Undefined";
+                    break;
+                }
+                var maturityScore = (totalPoints / totalWeightage).toFixed(2);
+
+                document.getElementById("maturityScore").value = maturityScore;
+
+                if (maturityScore < 1.5) {
+                    maturityLevel = "Level - 1";
+                }
+                if (maturityScore >= 1.5 && maturityScore < 2.5) {
+                    maturityLevel = "Level - 2";
+                }
+                if (maturityScore >= 2.5 && maturityScore < 3.5) {
+                    maturityLevel = "Level - 3";
+                }
+                if (maturityScore >= 3.5 && maturityScore < 4.5) {
+                    maturityLevel = "Level - 4";
+                }
+                if (maturityScore >= 4.5) {
+                    maturityLevel = "Level - 5";
+                }
+
+                document.getElementById("maturityLevel").value = maturityLevel;
+            }
+            document.getElementById("maturityLevel").value = maturityLevel;
+        }
+
+function goToMaturityDetails() {
+      window.location.href = "maturity-details.html"; 
+    }
+
+        function clearForm() {
+
+            // Reset dropdowns
+            var selects = document.getElementsByTagName("select");
+            for (var j = 0; j < selects.length; j++) {
+                selects[j].selectedIndex = 0;
+                selects[j].disabled = false;
+            }
+
+            // Reset maturity level and score
+            document.getElementById("maturityLevel").value = "";
+            document.getElementById("maturityScore").value = "";
+            document.getElementById("LOBid").value = "SELECT";
+        }
+    </script>
+</body>
+
+</html>
