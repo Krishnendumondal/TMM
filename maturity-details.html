@@ -59,10 +59,10 @@
   <table class="myTable" id="maturityTable">
     <thead>
       <tr>
+        <!-- Removed "Project Name" column -->
         <th style="width: 50%;">Project Name</th>
         <th style="width: 25%;">Maturity Level</th>
         <th style="width: 25%;">Maturity Score</th>
-        <th style="width: 25%;">LOBid</th> <!-- Include LOBid column -->
       </tr>
     </thead>
     <tbody>
@@ -79,17 +79,16 @@
     var tableBody = document.querySelector("#maturityTable tbody");
 
     if (maturityData && maturityData.length > 0) {
-      maturityData.forEach(function(data) {
+      maturityData.forEach(function (item) {
         var row = tableBody.insertRow();
-        var projectNameCell = row.insertCell(0);
+        var projectNameCell = row.insertCell(0); // Added Project Name cell
         var maturityLevelCell = row.insertCell(1);
         var maturityScoreCell = row.insertCell(2);
-        var lobIdCell = row.insertCell(3); // Include LOBid cell
 
-        projectNameCell.innerHTML = data.projectName;
-        maturityLevelCell.innerHTML = data.maturityLevel;
-        maturityScoreCell.innerHTML = data.maturityScore;
-        lobIdCell.innerHTML = data.LOBid; // Populate LOBid cell
+        // Populate cells with data
+        projectNameCell.textContent = item.LOBid; // Populate Project Name with LOBid
+        maturityLevelCell.textContent = item.maturityLevel;
+        maturityScoreCell.textContent = item.maturityScore;
       });
     }
   </script>
